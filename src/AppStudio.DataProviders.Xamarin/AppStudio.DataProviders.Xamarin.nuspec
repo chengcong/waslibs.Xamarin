@@ -3,7 +3,7 @@
   <metadata>
     <id>WindowsAppStudio.DataProviders.Xamarin</id>
     <version>$version$</version>
-    <title>Windows AppStudio Data Providers for Xamarin</title>
+    <title>Windows AppStudio Data Providers for Xamarin (non-official)</title>
     <authors>Alchiweb</authors>
     <owners>Alchiweb</owners>
     <licenseUrl>https://raw.githubusercontent.com/mugstrasbourg/waslibs.Xamarin/master/LICENSE</licenseUrl>

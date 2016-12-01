@@ -1,12 +1,9 @@
 #Windows App Studio Xamarin Libraries
 
-This repository contains the source code of the libraries used in the Xamarin version of the apps generated with [Windows App Studio](http://appstudio.windows.com).
-
-A sample implementation of these libraries is available in the Windows Store: [Windows App Studio Uwp Samples](https://www.microsoft.com/en-us/store/apps/windows-app-studio-uwp-samples/9nblggh4r0w1). You can see the implementation details in the [source code](https://github.com/wasteam/waslibs/tree/master/samples).
+This repository contains the source code of the libraries used in the non-official **Xamarin** version of the apps generated with [Windows App Studio](http://appstudio.windows.com).
 
 There are two libraries: DataProviders.Xamarin and Xamarin. The libraries are also available as Nuget packages. 
-```
-```
+
 # Table of Contents <a name="table-of-contents"><a>
 - [Data Providers Library](#data-providers)
     - [Facebook](#facebook)
@@ -25,8 +22,7 @@ Windows App Studio apps.
 
 This is a Portable Class Library that can be used in:
 - Xamarin
-and, with the "UWP" compilation directive : 
-- Windows 10
+- Windows 10 (with the "UWP" compilation directive: like the official waslibs)
 
 Among the Data Provider classes implemented in Windows App Studio, those which access third party data, help handling the complexity of each particular provider (API calls, authentication and authorization requirements, data parsing, etc.) so provides a smooth and uniform way to access the content from these providers.  All Data Providers take advantage of the AppCache service to improve the App performance.
 
