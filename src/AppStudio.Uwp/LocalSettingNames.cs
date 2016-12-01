@@ -1,4 +1,8 @@
+#if UWP
 namespace AppStudio.Uwp
+#else
+namespace AppStudio.Xamarin
+#endif
 {
     public static class LocalSettingNames
     {

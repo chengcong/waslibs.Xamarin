@@ -5,7 +5,11 @@
 // <summary></summary>
 // ***********************************************************************
 
+#if UWP
 namespace AppStudio.Uwp.Commands
+#else
+namespace AppStudio.Xamarin.Commands
+#endif
 {
     using System;
     using System.Windows.Input;

@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+#if UWP
 using Windows.Web.Http;
+#else
+using System.Net;
+#endif
 
 using Newtonsoft.Json;
 

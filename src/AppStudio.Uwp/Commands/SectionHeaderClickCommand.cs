@@ -1,16 +1,32 @@
 ﻿using System.Windows.Input;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+#if UWP
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+#else
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using Caliburn.Micro;
+using DependencyObject = Xamarin.Forms.BindableObject;
+using DependencyProperty = Xamarin.Forms.BindableProperty;
+#endif
 
 namespace AppStudio.Uwp.Commands
 {
     public static class SectionHeaderClickCommand
     {
+#if UWP
         public static readonly DependencyProperty CommandProperty = DependencyProperty.RegisterAttached(
             "Command", 
             typeof(ICommand),
             typeof(SectionHeaderClickCommand), 
             new PropertyMetadata(null, OnCommandPropertyChanged));
+#else
+        public static readonly DependencyProperty CommandProperty = DependencyPropertyHelper.RegisterAttached(
+    "Command",
+    typeof(ICommand),
+    typeof(SectionHeaderClickCommand),
+    null, OnCommandPropertyChanged);
+#endif
 
         public static void SetCommand(DependencyObject dependencyObject, ICommand value)
         {
@@ -27,12 +43,15 @@ namespace AppStudio.Uwp.Commands
 
         private static void OnCommandPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
+#if UWP
             var control = dependencyObject as Hub;
             if (control != null)
             {
                 control.SectionHeaderClick += OnSectionHeaderClick;
             }
+#endif
         }
+#if UWP
 
         private static void OnSectionHeaderClick(object sender, HubSectionHeaderClickEventArgs args)
         {
@@ -44,5 +63,6 @@ namespace AppStudio.Uwp.Commands
                 command.Execute(args.Section.DataContext);
             }
         }
+#endif
     }
 }

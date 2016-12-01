@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Globalization;
 
+#if UWP
 namespace AppStudio.Uwp
+#else
+namespace AppStudio.Xamarin
+#endif
 {
     public static class MathExtensions
     {

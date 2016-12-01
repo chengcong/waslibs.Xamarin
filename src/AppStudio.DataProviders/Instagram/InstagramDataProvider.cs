@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+#if UWP
 using Windows.Web.Http;
+#else
+using System.Net;
+#endif
 using System.Threading.Tasks;
 using AppStudio.DataProviders.Core;
 using AppStudio.DataProviders.Exceptions;

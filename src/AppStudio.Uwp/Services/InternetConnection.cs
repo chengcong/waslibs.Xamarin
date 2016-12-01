@@ -1,7 +1,10 @@
 ﻿using System;
+#if UWP
 using Windows.Networking.Connectivity;
-
 namespace AppStudio.Uwp.Services
+#else
+namespace AppStudio.Xamarin.Services
+#endif
 {
     public static class InternetConnection
     {
@@ -9,8 +12,12 @@ namespace AppStudio.Uwp.Services
         {
             try
             {
+#if UWP
                 ConnectionProfile connections = NetworkInformation.GetInternetConnectionProfile();
                 return connections != null && connections.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
+#else
+                return false;
+#endif
             }
             catch (Exception ex)
             {

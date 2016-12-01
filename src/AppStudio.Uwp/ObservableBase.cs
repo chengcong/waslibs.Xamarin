@@ -5,7 +5,11 @@
 // <summary></summary>
 // ***********************************************************************
 
+#if UWP
 namespace AppStudio.Uwp
+#else
+namespace AppStudio.Xamarin
+#endif
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;

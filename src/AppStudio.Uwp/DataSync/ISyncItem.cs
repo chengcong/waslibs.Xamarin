@@ -1,4 +1,8 @@
-﻿namespace AppStudio.Uwp.DataSync
+﻿#if UWP
+namespace AppStudio.Uwp.DataSync
+#else
+namespace AppStudio.Xamarin.DataSync
+#endif
 {
     public interface ISyncItem<T>
     {

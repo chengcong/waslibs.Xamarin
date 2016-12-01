@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#if UWP
 namespace AppStudio.Uwp.EventArguments
+#else
+namespace AppStudio.Xamarin.EventArguments
+#endif
 {
     public class BoolEventArgs : EventArgs
     {

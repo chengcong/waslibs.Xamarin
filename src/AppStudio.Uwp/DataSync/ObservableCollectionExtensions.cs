@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+#if UWP
 namespace AppStudio.Uwp.DataSync
+#else
+namespace AppStudio.Xamarin.DataSync
+#endif
 {
-    public static class ObservableCollectionExtensions
+public static class ObservableCollectionExtensions
     {
         public static void Sync<T>(this IList<T> oldCollection, IList<T> newItems) where T : ISyncItem<T>
         {

@@ -4,13 +4,22 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System.Windows.Input;
+#if UWP
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace AppStudio.Uwp.Commands
-{
-    using System.Windows.Input;
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Controls;
+#else
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using AppStudio.Xamarin.Services;
+using DependencyObject = Xamarin.Forms.BindableObject;
+using DependencyProperty = Xamarin.Forms.BindableProperty;
 
+namespace AppStudio.Xamarin.Commands
+#endif
+{
     /// <summary>
     /// This class defines an attached property that can be used to attach a Command to a 
     /// ListView, allowing to bind any ICommand when clicking any ListView. 
@@ -20,11 +29,20 @@ namespace AppStudio.Uwp.Commands
         /// <summary>
         /// Definition for the attached property.
         /// </summary>
-        private static readonly DependencyProperty CommandProperty = DependencyProperty.RegisterAttached(
+#if UWP
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.RegisterAttached(
             "Command", 
             typeof(ICommand),
             typeof(ItemClickCommand), 
             new PropertyMetadata(null, OnCommandPropertyChanged));
+#else
+        public static readonly DependencyProperty CommandProperty = DependencyPropertyHelper.RegisterAttached(
+            "Command",
+            typeof(ICommand),
+            typeof(ItemClickCommand),
+            null, OnCommandPropertyChanged);
+
+#endif
 
         /// <summary>
         /// Sets a command into the attached property.
@@ -56,13 +74,21 @@ namespace AppStudio.Uwp.Commands
         /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void OnCommandPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
+#if UWP
             var control = dependencyObject as ListViewBase;
             if (control != null)
             {
                 control.ItemClick += OnItemClick;
             }
+#else
+            var control = dependencyObject as ListView;
+            if (control != null)
+            {
+                control.ItemTapped += OnItemTapped;
+            }
+#endif
         }
-
+#if UWP
         /// <summary>
         /// Handles the <see cref="E:ItemClick" /> event.
         /// </summary>
@@ -77,6 +103,19 @@ namespace AppStudio.Uwp.Commands
             {
                 command.Execute(e.ClickedItem);
             }
-        } 
+        }
+#else
+        private static void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+
+            var control = sender as ListView;
+            var command = GetCommand(control);
+
+            if (command != null && command.CanExecute(e.Item))
+            {
+                command.Execute(e.Item);
+            }
+        }
+#endif
     }
 }

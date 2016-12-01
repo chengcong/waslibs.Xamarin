@@ -8,10 +8,17 @@
 namespace AppStudio.Uwp.Commands
 {
     using System.Windows.Input;
-
+#if UWP
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Data;
+#else
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+    using Caliburn.Micro;
+    using DependencyObject = Xamarin.Forms.BindableObject;
+    using DependencyProperty = Xamarin.Forms.BindableProperty;
+#endif
 
     using AppStudio.Uwp.Services;
 
@@ -24,11 +31,19 @@ namespace AppStudio.Uwp.Commands
         /// <summary>
         /// Definition for the attached property.
         /// </summary>
+#if UWP
         private static DependencyProperty CommandProperty = DependencyProperty.RegisterAttached(
             "Command",
             typeof(ICommand),
             typeof(EndOfScrollCommand),
             new PropertyMetadata(null, OnCommandPropertyChanged));
+#else
+        private static DependencyProperty CommandProperty = DependencyPropertyHelper.RegisterAttached(
+            "Command",
+            typeof(ICommand),
+            typeof(EndOfScrollCommand),
+            null, OnCommandPropertyChanged);
+#endif
 
         /// <summary>
         /// Sets a command into the attached property.

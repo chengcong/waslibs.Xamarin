@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+#if UWP
 namespace AppStudio.Uwp
+#else
+namespace AppStudio.Xamarin
+#endif
 {
     public static class Json
     {

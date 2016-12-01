@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+#if UWP
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Display;
 using Windows.UI;
@@ -8,22 +10,51 @@ using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
+#else
+using Xamarin.Forms;
+using Xamarin.Forms.Platform;
+using Xamarin.Forms.Xaml;
+using Caliburn.Micro.Xamarin.Forms;
+using Caliburn;
+using Caliburn.Micro;
+using Caliburn.Micro.Xamarin;
+
+using System.Resources;
+
+using DependencyObject = Xamarin.Forms.BindableObject;
+using DependencyProperty = Xamarin.Forms.BindableProperty;
+#endif
 
 namespace AppStudio.Uwp.Actions
 {
+#if UWP
     public class ActionsCommandBar : CommandBar
+#else
+    public class ActionsCommandBar : ContentView
+#endif
     {
+#if UWP
         public static readonly DependencyProperty ActionsSourceProperty =
             DependencyProperty.Register("ActionsSource", typeof(List<ActionInfo>), typeof(ActionsCommandBar), new PropertyMetadata(null, ActionsSourcePropertyChanged));
         public static readonly DependencyProperty HideOnLandscapeProperty =
             DependencyProperty.Register("HideOnLandscape", typeof(bool), typeof(ActionsCommandBar), new PropertyMetadata(false));
         public static readonly DependencyProperty IsVisibleProperty =
             DependencyProperty.Register("IsVisible", typeof(bool), typeof(ActionsCommandBar), new PropertyMetadata(true, OnIsVisiblePropertyChanged));
+#else
+        public static readonly DependencyProperty ActionsSourceProperty =
+     DependencyPropertyHelper.Register("ActionsSource", typeof(List<ActionInfo>), typeof(ActionsCommandBar), null, ActionsSourcePropertyChanged);
+        public static readonly DependencyProperty HideOnLandscapeProperty =
+            DependencyPropertyHelper.Register("HideOnLandscape", typeof(bool), typeof(ActionsCommandBar), false);
+        public static readonly DependencyProperty IsVisibleProperty =
+            DependencyPropertyHelper.Register("IsVisible", typeof(bool), typeof(ActionsCommandBar), true, OnIsVisiblePropertyChanged);
+
+#endif
 
         private static void OnIsVisiblePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var self = d as ActionsCommandBar;
-            bool isVisible = (bool)e.NewValue;
+#if UWP
+            var isVisible = (bool)e.NewValue;
             if (isVisible)
             {
                 self.Visibility = Visibility.Visible;
@@ -32,6 +63,9 @@ namespace AppStudio.Uwp.Actions
             {
                 self.Visibility = Visibility.Collapsed;
             }
+#else
+            self.IsVisible = (bool)e.NewValue;
+#endif
         }
 
         public ActionsCommandBar()
@@ -126,7 +160,12 @@ namespace AppStudio.Uwp.Actions
         private enum ActionTextProperties { Label, AutomationPropertiesName };
         private static string GetText(ActionInfo action, ActionTextProperties property)
         {
+#if UWP
             var resourceLoader = new ResourceLoader();
+#else
+            var resourceLoader = new ResourceManager("AppStudio.Uwp.Strings.Resources", typeof(ActionsCommandBar).GetTypeInfo().Assembly);
+
+#endif
             string text = null;
 
             if (!string.IsNullOrEmpty(action.Name))

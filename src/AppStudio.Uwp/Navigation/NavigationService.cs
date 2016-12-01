@@ -1,14 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 
 using Windows.System;
 using Windows.UI.Xaml.Controls;
-
-using AppStudio.Uwp.Commands;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Core;
+using AppStudio.Uwp.Commands;
 
 namespace AppStudio.Uwp.Navigation
 {
@@ -29,7 +30,6 @@ namespace AppStudio.Uwp.Navigation
             _rootFrame = rootFrame;
             _rootPage = rootPage;
             _handleSystemButtons = handleSystemButtons;
-
             _rootFrame.Navigated += _rootFrame_Navigated;
 
             if (_handleSystemButtons && SystemNavigationManager.GetForCurrentView() != null)
@@ -57,7 +57,6 @@ namespace AppStudio.Uwp.Navigation
             else
             {
                 _rootFrame.BackStack.Clear();
-
                 NavigateToPage(_rootPage, true);
             }
         }
@@ -79,10 +78,15 @@ namespace AppStudio.Uwp.Navigation
 
         public static void NavigateToPage(string page, object parameter, bool force = false)
         {
+//#if UWP
             CheckIsInitialized();
-
             var targetPage = _appAssembly.DefinedTypes.FirstOrDefault(t => t.Name == page);
 
+//#else
+
+//             Assembly ass = Application.Current.GetType().GetTypeInfo().Assembly;
+//            var targetPage = ass.DefinedTypes.FirstOrDefault(t => t.Name == page);
+//#endif
             if (targetPage != null)
             {
                 NavigateToPage(targetPage.AsType(), parameter, force);
@@ -96,7 +100,20 @@ namespace AppStudio.Uwp.Navigation
 
             if (!IsSamePage(page) || force)
             {
+//#if UWP
                 _rootFrame.Navigate(page, parameter);
+//#else
+//                Page targetPage = (Page) Activator.CreateInstance(page);
+//                IPageWithNavParameter targetPageWithNavParameter = targetPage as IPageWithNavParameter;
+//                if (targetPageWithNavParameter != null)
+//                {
+//                    targetPageWithNavParameter.NavParameter = parameter;
+//                }
+//                if (targetPage != null)
+//                {
+//                    Application.Current?.MainPage?.Navigation?.PushAsync(targetPage);
+//                }
+//#endif
             }
         }
 
@@ -117,7 +134,6 @@ namespace AppStudio.Uwp.Navigation
                 await Launcher.LaunchUriAsync(uri);
             }
         }
-
         [Obsolete("Implement your custom navigation logic")]
         public static void NavigateTo(INavigable item, bool force = false)
         {
@@ -131,7 +147,11 @@ namespace AppStudio.Uwp.Navigation
                 }
                 else if (item.NavigationInfo.NavigationType == NavigationType.DeepLink)
                 {
+//#if UWP
                     NavigationService.NavigateTo(item.NavigationInfo.TargetUri).FireAndForget();
+//#else
+//                    Device.OpenUri(item.NavigationInfo.TargetUri);
+//#endif
                 }
                 else
                 {
@@ -194,7 +214,6 @@ namespace AppStudio.Uwp.Navigation
                 e.Handled = true;
             }
         }
-
         private static void _rootFrame_Navigated(object sender, NavigationEventArgs e)
         {
             Navigated?.Invoke(sender, e);
@@ -211,7 +230,6 @@ namespace AppStudio.Uwp.Navigation
                 }
             }
         }
-
         private static void CheckIsInitialized()
         {
             if (!IsInitialized())

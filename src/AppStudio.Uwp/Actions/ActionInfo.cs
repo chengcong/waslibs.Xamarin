@@ -1,6 +1,10 @@
 ﻿using System.Windows.Input;
 
+#if UWP
 namespace AppStudio.Uwp.Actions
+#else
+namespace AppStudio.Xamarin.Actions
+#endif
 {
     public class ActionInfo
     {

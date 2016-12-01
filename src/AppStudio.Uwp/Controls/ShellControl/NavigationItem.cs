@@ -1,11 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#if UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
 
 namespace AppStudio.Uwp.Controls
+#else
+using Xamarin.Forms;
+using Xamarin.Forms.Platform;
+using Xamarin.Forms.Xaml;
+using AppStudio.Xamarin.Services;
+using DependencyObject = Xamarin.Forms.BindableObject;
+using DependencyProperty = Xamarin.Forms.BindableProperty;
+
+namespace AppStudio.Xamarin.Controls
+#endif
 {
     public class NavigationItem : DependencyObject
     {
@@ -24,6 +35,7 @@ namespace AppStudio.Uwp.Controls
         {
             this.Caption = caption;
         }
+#if UWP
         public NavigationItem(string id, Symbol symbol, string caption, Brush color = null) : this(id, caption)
         {
             this.Icon = CreateIcon(symbol, color);
@@ -108,27 +120,40 @@ namespace AppStudio.Uwp.Controls
                 this.Background = background;
             }
         }
-
+#endif
         public bool IsSeparator { get; set; }
 
-        #region ID
+#region ID
         public string ID
         {
             get { return (string)GetValue(IDProperty); }
             set { SetValue(IDProperty, value); }
         }
-
+#if UWP
         public static readonly DependencyProperty IDProperty = DependencyProperty.Register("ID", typeof(string), typeof(NavigationItem), new PropertyMetadata(null));
+#else
+        public static readonly DependencyProperty IDProperty = DependencyPropertyHelper.Register("ID", typeof(string), typeof(NavigationItem), null);
+#endif
         #endregion
 
         #region Icon
+#if UWP
+
         public IconElement Icon
         {
             get { return (IconElement)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
-
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(IconElement), typeof(NavigationItem), new PropertyMetadata(null));
+#else
+        public string Icon
+        {
+            get { return (string)GetValue(IconProperty); }
+            set { SetValue(IconProperty, value); }
+        }
+        public static readonly DependencyProperty IconProperty = DependencyPropertyHelper.Register("Icon", typeof(string), typeof(NavigationItem), null);
+#endif
+
         #endregion
 
         #region Image
@@ -137,8 +162,11 @@ namespace AppStudio.Uwp.Controls
             get { return (Image)GetValue(ImageProperty); }
             set { SetValue(ImageProperty, value); }
         }
-
+#if UWP
         public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(Image), typeof(NavigationItem), new PropertyMetadata(null));
+#else
+        public static readonly DependencyProperty ImageProperty = DependencyPropertyHelper.Register("Image", typeof(Image), typeof(NavigationItem), null);
+#endif
         #endregion
 
         #region Caption
@@ -148,10 +176,15 @@ namespace AppStudio.Uwp.Controls
             set { SetValue(CaptionProperty, value); }
         }
 
+#if UWP
         public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register("Caption", typeof(string), typeof(NavigationItem), new PropertyMetadata(null));
-        #endregion
+#else
+        public static readonly DependencyProperty CaptionProperty = DependencyPropertyHelper.Register("Caption", typeof(string), typeof(NavigationItem), null);
+#endif
+#endregion
 
-        #region Background
+#region Background
+#if UWP
         public Brush Background
         {
             get { return (Brush)GetValue(BackgroundProperty); }
@@ -159,9 +192,11 @@ namespace AppStudio.Uwp.Controls
         }
 
         public static readonly DependencyProperty BackgroundProperty = DependencyProperty.Register("Background", typeof(Brush), typeof(NavigationItem), new PropertyMetadata(null));
-        #endregion
+#endif
+#endregion
 
-        #region Control
+#region Control
+#if UWP
         public Control Control
         {
             get { return (Control)GetValue(ControlProperty); }
@@ -169,38 +204,57 @@ namespace AppStudio.Uwp.Controls
         }
 
         public static readonly DependencyProperty ControlProperty = DependencyProperty.Register("Control", typeof(Control), typeof(NavigationItem), new PropertyMetadata(null));
-        #endregion
+#else
+        public VisualElement Control
+        {
+            get { return (VisualElement)GetValue(ControlProperty); }
+            set { SetValue(ControlProperty, value); }
+        }
+        public static readonly DependencyProperty ControlProperty = DependencyPropertyHelper.Register("Control", typeof(VisualElement), typeof(NavigationItem), null);
+#endif
+#endregion
 
-        #region SubItems
+#region SubItems
         public IEnumerable<NavigationItem> SubItems
         {
             get { return (IEnumerable<NavigationItem>)GetValue(SubItemsProperty); }
             set { SetValue(SubItemsProperty, value); }
         }
-
+#if UWP
         public static readonly DependencyProperty SubItemsProperty = DependencyProperty.Register("SubItems", typeof(IEnumerable<NavigationItem>), typeof(NavigationItem), new PropertyMetadata(null));
-        #endregion
+#else
+        public static readonly DependencyProperty SubItemsProperty = DependencyPropertyHelper.Register("SubItems", typeof(IEnumerable<NavigationItem>), typeof(NavigationItem), null);
+#endif
+#endregion
 
-        #region ClearSelection
+#region ClearSelection
         public bool ClearSelection
         {
             get { return (bool)GetValue(ClearSelectionProperty); }
             set { SetValue(ClearSelectionProperty, value); }
         }
 
+#if UWP
         public static readonly DependencyProperty ClearSelectionProperty = DependencyProperty.Register("ClearSelection", typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
-        #endregion
+#else
+        public static readonly DependencyProperty ClearSelectionProperty = DependencyPropertyHelper.Register("ClearSelection", typeof(bool), typeof(NavigationItem), false);
+#endif
+#endregion
 
-        #region OnClick
+#region OnClick
         public Action<NavigationItem> OnClick
         {
             get { return (Action<NavigationItem>)GetValue(OnClickProperty); }
             set { SetValue(OnClickProperty, value); }
         }
 
+#if UWP
         public static readonly DependencyProperty OnClickProperty = DependencyProperty.Register("OnClick", typeof(Action<NavigationItem>), typeof(NavigationItem), new PropertyMetadata(null));
-        #endregion
-
+#else
+        public static readonly DependencyProperty OnClickProperty = DependencyPropertyHelper.Register("OnClick", typeof(Action<NavigationItem>), typeof(NavigationItem), null);
+#endif
+#endregion
+#if UWP
         public static FontIcon CreateIcon(string glyph, Brush color = null)
         {
             if(glyph == null)
@@ -260,5 +314,6 @@ namespace AppStudio.Uwp.Controls
                 return new SymbolIcon(symbol) { Foreground = color };
             }
         }
+#endif
     }
 }

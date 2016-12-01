@@ -1,8 +1,12 @@
 ﻿using System;
 
+#if UWP
 using Windows.Foundation;
-
 namespace AppStudio.Uwp
+#else
+using Xamarin.Forms;
+namespace AppStudio.Xamarin
+#endif
 {
     public static class SizeExtensions
     {

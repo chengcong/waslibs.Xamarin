@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#if UWP
 namespace AppStudio.Uwp.Navigation
+#else
+namespace AppStudio.Xamarin.Navigation
+#endif
 {
     public sealed class NavigationInitializationException : Exception
     {

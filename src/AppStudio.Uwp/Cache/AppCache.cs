@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Net.NetworkInformation;
+
+#if UWP
 namespace AppStudio.Uwp.Cache
+#else
+namespace AppStudio.Xamarin.Cache
+#endif
 {
     public static class AppCache
     {

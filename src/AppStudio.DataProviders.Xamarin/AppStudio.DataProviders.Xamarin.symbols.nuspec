@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>WindowsAppStudio.DataProviders.Xamarin</id>
+    <version>$version$</version>
+    <title>Windows AppStudio Data Providers for Xamarin</title>
+    <authors>Alchiweb</authors>
+    <owners>Alchiweb</owners>
+    <licenseUrl>https://raw.githubusercontent.com/mugstrasbourg/waslibs.Xamarin/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mugstrasbourg/waslibs.Xamarin</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Implementation of the data sources provided by Windows AppStudio. This library enable access to diferent data source like RSS, Bing, Facebook, Flickr, Instagram, Twitter and YouTube.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Windows AppStudio Net Portable Twitter YouTube OAuth RSS Instagram Facebook Bing Flickr</tags>
+    <references>
+      <reference file="AppStudio.DataProviders.Xamarin.dll" />
+    </references>
+    <dependencies>
+      <dependency id="Microsoft.Bcl" version="1.1.10" />
+      <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
+      <dependency id="Microsoft.Net.Http" version="2.2.29" />
+      <dependency id="Newtonsoft.Json" version="9.0.1" />
+      <dependency id="PCLCrypto" version="2.0.147" />
+      <dependency id="PCLStorage" version="1.0.2" />
+      <dependency id="PInvoke.BCrypt" version="0.3.90" />
+      <dependency id="PInvoke.Kernel32" version="0.3.90" />
+      <dependency id="PInvoke.NCrypt" version="0.3.90" />
+      <dependency id="PInvoke.Windows.Core" version="0.3.90" />
+      <dependency id="Refractored.MvvmHelpers" version="1.0.1" />
+      <dependency id="Validation" version="2.3.7" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\AppStudio.DataProviders.Xamarin.*" target="lib\portable-net45+win8+wpa81" />
+    <file src="**\*.cs" target="src" />
+  </files>
+</package>

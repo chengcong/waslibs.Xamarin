@@ -5,7 +5,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+#if UWP
 namespace AppStudio.Uwp.Html
+#else
+namespace AppStudio.Xamarin.Html
+#endif
 {
     public sealed class HtmlDocument : HtmlFragment
     {

@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
+#if UWP
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
+#else
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+#endif
 
 namespace AppStudio.DataProviders.Core
 {
@@ -53,7 +60,7 @@ namespace AppStudio.DataProviders.Core
             var content = await response.Content.ReadAsStringAsync();
             result.Result = content;
             return result;
-        }      
+        }
 
         internal static async Task<HttpRequestResult> DownloadRssAsync(HttpRequestSettings settings)
         {
@@ -69,14 +76,23 @@ namespace AppStudio.DataProviders.Core
 
         private static async Task<HttpResponseMessage> GetResponseMessage(HttpRequestSettings settings)
         {
+#if UWP
             var filter = new HttpBaseProtocolFilter();
             filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.MostRecent;
-
             var httpClient = new HttpClient(filter);
-
+#else
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            };
+            //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            var httpClient = new HttpClient(handler);
+            httpClient.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue() { NoCache = true };
+#endif
             AddRequestHeaders(httpClient, settings);
 
             HttpResponseMessage response = await httpClient.GetAsync(settings.RequestedUri);
+
             return response;
         }
 
@@ -97,7 +113,11 @@ namespace AppStudio.DataProviders.Core
                         {
                             settings.Headers[customHeaderName] += $" {GetWASSufix()}";
                         }
+#if UWP
                         httpClient.DefaultRequestHeaders[customHeaderName] = settings.Headers[customHeaderName];
+#else
+                        httpClient.DefaultRequestHeaders.Add(customHeaderName, settings.Headers[customHeaderName]);
+#endif
                     }
 
                 }
@@ -158,7 +178,7 @@ namespace AppStudio.DataProviders.Core
 
         internal static string GetWASSufix()
         {
-            return  $"WAS/{AssemblyUtils.GetVersion()}";
+            return $"WAS/{AssemblyUtils.GetVersion()}";
         }
     }
 }

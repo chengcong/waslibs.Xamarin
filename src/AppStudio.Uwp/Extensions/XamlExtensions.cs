@@ -3,14 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+#if UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace AppStudio.Uwp
+#else
+using System.Reflection;
+using System.Resources;
+using Xamarin.Forms;
+
+namespace AppStudio.Xamarin
+#endif
 {
     public static class XamlExtensions
     {
+#if UWP
         public static T FindChildOfType<T>(this DependencyObject parent) where T : DependencyObject
         {
             if (parent == null) return null;
@@ -46,7 +56,7 @@ namespace AppStudio.Uwp
                 scrollViewer.ChangeView(0, 0, scrollViewer.ZoomFactor, true);
             }
         }
-
+#endif
         public static object Resource(this string self)
         {
             if (Application.Current.Resources.ContainsKey(self))

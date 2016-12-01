@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#if UWP
 namespace AppStudio.Uwp.Cache
+#else
+namespace AppStudio.Xamarin.Cache
+#endif
 {
     [Obsolete("Use a custom loading strategy in your app")]
     public class CacheSettings

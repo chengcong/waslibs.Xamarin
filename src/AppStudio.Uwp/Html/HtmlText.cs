@@ -5,7 +5,11 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+#if UWP
 namespace AppStudio.Uwp.Html
+#else
+namespace AppStudio.Xamarin.Html
+#endif
 {
     public sealed class HtmlText : HtmlFragment
     {

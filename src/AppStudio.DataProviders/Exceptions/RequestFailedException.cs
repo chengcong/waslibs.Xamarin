@@ -1,5 +1,9 @@
 ﻿using System;
+#if UWP
 using Windows.Web.Http;
+#else
+using System.Net;
+#endif
 
 namespace AppStudio.DataProviders.Exceptions
 {

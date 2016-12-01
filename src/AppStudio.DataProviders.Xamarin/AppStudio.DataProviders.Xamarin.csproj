@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7189A42D-6F1A-4FA3-8E00-E2C14FDF167A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AppStudio.DataProviders</RootNamespace>
+    <AssemblyName>AppStudio.DataProviders.Xamarin</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\CodeAnalysisRules\ExtendedDesignGuidelineRulesAppStudioCustom.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\AppStudio.DataProviders\Bing\BingDataConfig.cs">
+      <Link>Bing\BingDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Bing\BingDataProvider.cs">
+      <Link>Bing\BingDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Bing\BingParser.cs">
+      <Link>Bing\BingParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Core\AssemblyUtils.cs">
+      <Link>Core\AssemblyUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Core\JsonParser.cs">
+      <Link>Core\JsonParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Core\StringValue.cs">
+      <Link>Core\StringValue.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Core\ExtensionMethods.cs">
+      <Link>Core\ExtensionMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\DataProviderBase.cs">
+      <Link>DataProviderBase.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\DynamicStorage\DynamicStorageDataConfig.cs">
+      <Link>DynamicStorage\DynamicStorageDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\DynamicStorage\DynamicStorageDataProvider.cs">
+      <Link>DynamicStorage\DynamicStorageDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Exceptions\ParserNullException.cs">
+      <Link>Exceptions\ParserNullException.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Exceptions\ConfigNullException.cs">
+      <Link>Exceptions\ConfigNullException.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Exceptions\OAuthKeysRevokedException.cs">
+      <Link>Exceptions\OAuthKeysRevokedException.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Exceptions\RequestFailedException.cs">
+      <Link>Exceptions\RequestFailedException.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Exceptions\TooManyRequestsException.cs">
+      <Link>Exceptions\TooManyRequestsException.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Exceptions\UserNotFoundException.cs">
+      <Link>Exceptions\UserNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Facebook\FacebookDataConfig.cs">
+      <Link>Facebook\FacebookDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Facebook\FacebookDataProvider.cs">
+      <Link>Facebook\FacebookDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Facebook\FacebookParser.cs">
+      <Link>Facebook\FacebookParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Flickr\FlickrDataConfig.cs">
+      <Link>Flickr\FlickrDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Flickr\FlickrDataProvider.cs">
+      <Link>Flickr\FlickrDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Flickr\FlickrParser.cs">
+      <Link>Flickr\FlickrParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Html\HtmlDataProvider.cs">
+      <Link>Html\HtmlDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Html\HtmlParser.cs">
+      <Link>Html\HtmlParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\IDisplayNameForSchema.cs">
+      <Link>IDisplayNameForSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\IAddressForSchema.cs">
+      <Link>IAddressForSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\IPhoneForSchema.cs">
+      <Link>IPhoneForSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\IEmailForSchema.cs">
+      <Link>IEmailForSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Instagram\InstagramDataConfig.cs">
+      <Link>Instagram\InstagramDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Instagram\InstagramDataProvider.cs">
+      <Link>Instagram\InstagramDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Instagram\InstagramParser.cs">
+      <Link>Instagram\InstagramParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Core\HttpRequestResult.cs">
+      <Link>Core\HttpRequestResult.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Core\HttpRequestSettings.cs">
+      <Link>Core\HttpRequestSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\IParser.cs">
+      <Link>IParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\IParserExtensions.cs">
+      <Link>IParserExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\LocalStorage\LocalStorageDataConfig.cs">
+      <Link>LocalStorage\LocalStorageDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\LocalStorage\LocalStorageDataProvider.cs">
+      <Link>LocalStorage\LocalStorageDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Bing\BingSchema.cs">
+      <Link>Bing\BingSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Facebook\FacebookSchema.cs">
+      <Link>Facebook\FacebookSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Flickr\FlickrSchema.cs">
+      <Link>Flickr\FlickrSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Core\HttpRequest.cs">
+      <Link>Core\HttpRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\SortDirection.cs">
+      <Link>SortDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\RestApi\RestApiDataConfig.cs">
+      <Link>RestApi\RestApiDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\RestApi\RestApiDataProvider.cs">
+      <Link>RestApi\RestApiDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Rss\RssDataConfig.cs">
+      <Link>Rss\RssDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Rss\RssDataProvider.cs">
+      <Link>Rss\RssDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Html\HtmlSchema.cs">
+      <Link>Html\HtmlSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Instagram\InstagramSchema.cs">
+      <Link>Instagram\InstagramSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Menu\MenuSchema.cs">
+      <Link>Menu\MenuSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Rss\RssParser.cs">
+      <Link>Rss\RssParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Rss\RssSchema.cs">
+      <Link>Rss\RssSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Twitter\TwitterParser.cs">
+      <Link>Twitter\TwitterParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Twitter\TwitterDataConfig.cs">
+      <Link>Twitter\TwitterDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Twitter\TwitterDataProvider.cs">
+      <Link>Twitter\TwitterDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Twitter\TwitterSchema.cs">
+      <Link>Twitter\TwitterSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Exceptions\OAuthKeysNotPresentException.cs">
+      <Link>Exceptions\OAuthKeysNotPresentException.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Exceptions\ConfigParameterNullException.cs">
+      <Link>Exceptions\ConfigParameterNullException.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\WordPress\WordPressCommentParser.cs">
+      <Link>WordPress\WordPressCommentParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\WordPress\WordPressCommentsResponse.cs">
+      <Link>WordPress\WordPressCommentsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\WordPress\WordPressDataConfig.cs">
+      <Link>WordPress\WordPressDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\WordPress\WordPressDataProvider.cs">
+      <Link>WordPress\WordPressDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\WordPress\WordPressResponse.cs">
+      <Link>WordPress\WordPressResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\WordPress\WordPressParser.cs">
+      <Link>WordPress\WordPressParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\WordPress\WordPressCommentSchema.cs">
+      <Link>WordPress\WordPressCommentSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\WordPress\WordPressSchema.cs">
+      <Link>WordPress\WordPressSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\YouTube\YouTubeParser.cs">
+      <Link>YouTube\YouTubeParser.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\YouTube\YouTubeDataConfig.cs">
+      <Link>YouTube\YouTubeDataConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\YouTube\YouTubeDataProvider.cs">
+      <Link>YouTube\YouTubeDataProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\YouTube\YouTubeSchema.cs">
+      <Link>YouTube\YouTubeSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\AppStudio.DataProviders\SchemaBase.cs">
+      <Link>SchemaBase.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="AppStudio.DataProviders.Xamarin.symbols.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AppStudio.DataProviders.Xamarin.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="Dictionary.xml">
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MvvmHelpers, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Refractored.MvvmHelpers.1.1.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\MvvmHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PCLCrypto.2.0.147\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PCLStorage, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PCLStorage.1.0.2\lib\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin.iOS+Xamarin.Mac\PCLStorage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PCLStorage.Abstractions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PCLStorage.1.0.2\lib\portable-net45+wp8+wpa81+win8+monoandroid+monotouch+Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.BCrypt, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PInvoke.BCrypt.0.3.152\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.BCrypt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.Kernel32, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PInvoke.Kernel32.0.3.152\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Kernel32.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.NCrypt, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PInvoke.NCrypt.0.3.152\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.NCrypt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.Windows.Core, Version=0.3.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PInvoke.Windows.Core.0.3.152\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Windows.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Validation, Version=2.3.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Validation.2.3.7\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

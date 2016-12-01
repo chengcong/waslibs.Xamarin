@@ -3,10 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+#if UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace AppStudio.Uwp.Services
+#else
+using Xamarin.Forms;
+using Xamarin.Forms.Platform;
+using Xamarin.Forms.Xaml;
+using FrameworkElement = Xamarin.Forms.VisualElement;
+using DependencyObject = Xamarin.Forms.BindableObject;
+using DependencyProperty = Xamarin.Forms.BindableProperty;
+
+namespace AppStudio.Xamarin.Services
+#endif
 {
     public class BindingListenerService
     {
@@ -17,11 +29,20 @@ namespace AppStudio.Uwp.Services
 
         public BindingListenerService()
         {
+#if UWP
             property = DependencyProperty.RegisterAttached(
                 "DependencyPropertyListener" + index++,
                 typeof(object),
                 typeof(BindingListenerService),
                 new PropertyMetadata(null, (d, e) => { OnChanged(new BindingChangedEventArgs(e)); }));
+#else
+            property = DependencyPropertyHelper.RegisterAttached(
+                "DependencyPropertyListener" + index++,
+                typeof(object),
+                typeof(BindingListenerService),
+                null, (d, e) => { OnChanged(new BindingChangedEventArgs(e)); });
+
+#endif
         }
 
         public void OnChanged(BindingChangedEventArgs e)

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+#if UWP
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
+using Windows.Storage.Streams;
+#else
+using PCLCrypto;
+using static PCLCrypto.WinRTCrypto;
+#endif
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.IO.Compression;
-
-using Windows.Security.Cryptography;
-using Windows.Security.Cryptography.Core;
-using Windows.Storage.Streams;
 
 using AppStudio.DataProviders.Exceptions;
 using Newtonsoft.Json;
@@ -550,11 +554,20 @@ namespace AppStudio.DataProviders.Twitter
 
         public static string GenerateHash(string input, string key)
         {
+#if UWP
             MacAlgorithmProvider mac = MacAlgorithmProvider.OpenAlgorithm("HMAC_SHA1");
             IBuffer keyMaterial = CryptographicBuffer.ConvertStringToBinary(key, BinaryStringEncoding.Utf8);
             CryptographicKey cryptoKey = mac.CreateKey(keyMaterial);
             IBuffer hash = CryptographicEngine.Sign(cryptoKey, CryptographicBuffer.ConvertStringToBinary(input, BinaryStringEncoding.Utf8));
             return CryptographicBuffer.EncodeToBase64String(hash);
+#else
+
+            var mac = MacAlgorithmProvider.OpenAlgorithm(MacAlgorithm.HmacSha1);
+            var keyMaterial = CryptographicBuffer.ConvertStringToBinary(key, Encoding.UTF8);
+            var cryptoKey = mac.CreateKey(keyMaterial);
+            var hash = CryptographicEngine.Sign(cryptoKey, CryptographicBuffer.ConvertStringToBinary(input, Encoding.UTF8));
+            return CryptographicBuffer.EncodeToBase64String(hash);
+#endif
         }
     }
 }

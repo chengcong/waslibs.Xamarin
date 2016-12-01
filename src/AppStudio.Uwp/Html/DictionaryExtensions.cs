@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+#if UWP
 namespace AppStudio.Uwp.Html
+#else
+namespace AppStudio.Xamarin.Html
+#endif
 {
     static class DictionaryExtensions
     {

@@ -5,7 +5,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+#if UWP
 namespace AppStudio.Uwp.Html
+#else
+namespace AppStudio.Xamarin.Html
+#endif
 {
     internal sealed class TagReader
     {
@@ -26,7 +30,11 @@ namespace AppStudio.Uwp.Html
         {
             Document = document;
             _regexTag = GetTagRegex();
+#if UWP
             _regexAttributes = new Regex(RegexPatternAttributes, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+#else
+            _regexAttributes = new Regex(RegexPatternAttributes, RegexOptions.IgnoreCase);
+#endif
         }
 
         public static TagReader Create(string document)
@@ -132,7 +140,11 @@ namespace AppStudio.Uwp.Html
 
         private static Regex GetTagRegex()
         {
+#if UWP
             return new Regex(RegexPatternTag, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+#else
+            return new Regex(RegexPatternTag, RegexOptions.IgnoreCase);
+#endif
         }
     }
 }
