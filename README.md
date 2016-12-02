@@ -2,7 +2,13 @@
 
 This repository contains the source code of the libraries used in the non-official **Xamarin** version of the apps generated with [Windows App Studio](http://appstudio.windows.com).
 
-There are two libraries: DataProviders.Xamarin and Xamarin. The libraries are also available as Nuget packages. 
+There are two namespaces: AppStudio.DataProviders.Xamarin and AppStudio.Xamarin. The libraries are also available as Nuget packages. 
+
+The Nuget packages are here:
+```
+https://www.nuget.org/packages/WindowsAppStudio.DataProviders.Xamarin
+https://www.nuget.org/packages/WindowsAppStudio.Xamarin
+```
 
 # Table of Contents <a name="table-of-contents"><a>
 - [Data Providers Library](#data-providers)
